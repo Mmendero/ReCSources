@@ -26,3 +26,9 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText ="Email: "+text.email+" Nick name: "+text.name+" Comment: "+text.comment;
+  return liElement;
+}
