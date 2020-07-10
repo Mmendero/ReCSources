@@ -16,19 +16,30 @@
     <!-- Star Rating Libraries -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.6/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.6/js/star-rating.min.js" type="text/javascript"></script>
-
   </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
 
-      <input id="input-2" type="text" class="rating-loading">
-      <script>loadStarRatings("#input-2")</script>
-      
+  <body>
+
+    <div class="header">
+        <a href="#default" class="logo">Resource Site</a>
+        <div class="header-right">
+            <a class="active" href="#home">Home</a>
+            <a href="#contact">Contact</a>
+            <a href="#login-signup">Login/Signup</a>
+        </div>
     </div>
+
+    <div class="content">
+        <p>This is the intro paragraph</p>
+        <p id = "prompt">The Opportunities i'm looking for are...</p>
+        <input type="text" placeholder="Search ...">
+    </div>
+
+    <div>
+        <input id="input-2" type="text" class="rating-loading">
+        <script>loadStarRatings("#input-2")</script>
+    </div>
+
   </body>
+
 </html>
