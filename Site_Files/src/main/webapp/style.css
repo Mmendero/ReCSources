@@ -1,10 +1,12 @@
 * {box-sizing: border-box;}
 
+/*General Body Format*/
 body { 
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/*Header/Navigation Styles*/
 .header {
   overflow: hidden;
   background-color: #f1f1f1;
@@ -53,6 +55,7 @@ body {
   }
 }
 
+/*Page Content Style*/
 .content{
     text-align: center;
     font-size: 25px;
@@ -67,10 +70,28 @@ body {
   padding: 20px;
 }
 
+/*Search Bar Attributes*/
 #prompt {
     float: left;
     text-align: left;
     font-weight: bold;
     font-size: 25px;
 }
+
+/*Contacts Profile Picture Style*/
+.content img {
+    border-radius: 50%;
+    width: 200px;
+}
+
+.content name{
+    color: #42d7f5;
+    font-weight: bold;
+}
+
+.contact bio{
+    padding: 15px;
+    font-size: 15;
+}
+
 
