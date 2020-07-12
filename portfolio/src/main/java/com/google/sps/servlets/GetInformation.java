@@ -20,12 +20,15 @@ import com.google.appengine.api.datastore.Entity;
 
 
 /** Servlet connect to the data store, store the commnets data*/
-@WebServlet("/inf")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/getInf")
+public class GetInformation extends HttpServlet {
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("PostInformation").addSort("timestamp", SortDirection.DESCENDING);
 
+    String name_search= request.getParameter("name-search");
+    String type_search= request.getParameter("type-search");  
+    Query query = new Query("PostInformation").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
@@ -43,6 +46,7 @@ public class HomeServlet extends HttpServlet {
     response.setContentType("application/json");
     String json = new Gson().toJson(list);
     response.getWriter().println(json); 
+    
 }
 private String convertToJson() {
     String json = "{";
@@ -56,28 +60,9 @@ private String convertToJson() {
 
 @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String emailInput = getParameter(request, "email-imput", "");
-    String text = getParameter(request, "name-imput", "");   
-    String textType = getParameter(request, "type-imput", "");   
-    String text1 = getParameter(request, "comment-imput", "");   
-    long timestamp = System.currentTimeMillis();
-    Entity commentEntity = new Entity("PostInformation");
-    commentEntity.setProperty("email",emailInput);
-    commentEntity.setProperty("type",textType);
-    commentEntity.setProperty("name",text);
-    commentEntity.setProperty("comment", text1);
-    commentEntity.setProperty("timestamp", timestamp);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(commentEntity);
-    response.sendRedirect("/import.html");
-  }
+  
+}
 
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-      return defaultValue;
-    }
-    return value;
-  }
+
 
 }
