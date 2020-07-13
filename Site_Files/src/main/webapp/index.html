@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Resource Site</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 
@@ -20,21 +20,24 @@
 
   <body>
 
+    <!--Code for Header/Navigation Menu--> 
     <div class="header">
-        <a href="#default" class="logo">Resource Site</a>
+        <a href="./index.html" class="logo">Resource Site</a>
         <div class="header-right">
-            <a class="active" href="#home">Home</a>
-            <a href="#contact">Contact</a>
-            <a href="#login-signup">Login/Signup</a>
+            <a class="active" href="./index.html">Home</a>
+            <a href="./contacts.html">Contact</a>
+            <a href="./login.html">Login/Signup</a>
         </div>
     </div>
 
+    <!--Main content of page (Options/Search Bar)--> 
     <div class="content">
         <p>This is the intro paragraph</p>
         <p id = "prompt">The Opportunities i'm looking for are...</p>
         <input type="text" placeholder="Search ...">
     </div>
 
+    <!--Rating System Output--> 
     <div>
         <input id="input-2" type="text" class="rating-loading">
         <script>loadStarRatings("#input-2")</script>
