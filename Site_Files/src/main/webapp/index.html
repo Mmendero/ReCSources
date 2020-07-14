@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Resource Site</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+    <!-- JQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <!-- Bootstrap Libraries-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    
+    <!-- Star Rating Libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.6/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.6/js/star-rating.min.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+
+    <!--Code for Header/Navigation Menu--> 
+    <div class="header">
+        <a href="./index.html" class="logo">Resource Site</a>
+        <div class="header-right">
+            <a class="active" href="./index.html">Home</a>
+            <a href="./contacts.html">Contact</a>
+            <a href="./login.html">Login/Signup</a>
+        </div>
+    </div>
+
+    <!--Main content of page (Options/Search Bar)--> 
+    <div class="content">
+        <p>This is the intro paragraph</p>
+        <p id = "prompt">The Opportunities i'm looking for are...</p>
+        <input type="text" placeholder="Search ...">
+    </div>
+
+    <!--Rating System Output--> 
+    <div>
+        <input id="input-2" type="text" class="rating-loading">
+        <script>loadStarRatings("#input-2")</script>
+    </div>
+
+  </body>
+
+</html>
