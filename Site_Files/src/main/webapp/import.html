@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+<body onload="getHistory()">
+
+<form action="/inf" method="POST">
+      <p>Enter name of your want to share:</p>
+      <textarea name="name-imput">name</textarea>
+      <p>Enter your Email:</p>
+      <textarea name="email-imput">name</textarea>
+      <p>Type of that:</p>
+      <textarea name="type-imput">type</textarea>
+      <p>Enter your comment:</p>
+      <textarea name="comment-imput" style="width:200px; height:100px">your comment</textarea>
+      <br/><br/>
+      <input type="submit" />
+</form>
+<ul id="history"></ul>
+<a href="/output.html" class="u_btn_add">outport</a>
+</body>
+</html>

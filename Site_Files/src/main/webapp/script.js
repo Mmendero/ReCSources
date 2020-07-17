@@ -27,6 +27,24 @@ function addRandomGreeting() {
   greetingContainer.innerText = greeting;
 }
 
+
+function getHistory() {
+  fetch('/inf').then(response => response.json()).then((comment) => {
+   console.log(comment);
+    const historyEl = document.getElementById('history');
+    comment.forEach((line) => {
+      historyEl.appendChild(createListElement(line));
+    });
+  });
+}
+
+
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText ="Email: "+text.email+" Nick name: "+text.name+" Comment: "+text.comment;
+  return liElement;
+}
+
 /**
  * Loads the star rating settings into the page.
  */
@@ -38,4 +56,20 @@ function loadStarRatings(id){
         starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'}
         });
     });
+
+}
+function search(){
+   let name= document.getElementById("name-search");
+  
+
+    let type= document.getElementById("type-search");
+  
+   
+   fetch('/getInf?name-search='+name.value + '&type-search=' +type.value).then(response => response.json()).then((comment) => {
+   console.log(comment);
+   const historyEl = document.getElementById('history');
+    comment.forEach((line) => {
+      historyEl.appendChild(createListElement(line));
+    });
+  });
 }
