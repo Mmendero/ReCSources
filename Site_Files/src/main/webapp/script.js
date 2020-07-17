@@ -46,6 +46,64 @@ function createListElement(text) {
 }
 
 /**
+ * Retrieves the posts from the /getInf servlet and injects it into the page
+ */
+function getAllPosts() {
+  fetch('/getInf').then(response => response.json()).then((posts) => {
+      
+    const postsListElement = document.getElementById('posts-container');
+    postsListElement.innerHTML = '';
+
+    // for each message, display it in a list
+    posts.forEach(post => {
+        postsListElement.appendChild(createPostElement(post));
+        // Sets up the functionality for the ratings
+        loadStarRatings(post.id);
+        storeStarRatings(post.id);
+    });
+  });
+}
+
+/**
+ * Create each post element using the DataStore information
+ */
+function createPostElement(postData) {
+  const liElement = document.createElement('li');
+  liElement.className = 'post' + postData.id;
+
+  const nameElement = document.createElement('span');
+  nameElement.innerText = postData.name + " (" + postData.email + ")" ;
+
+  const typeElement = document.createElement('span');
+  typeElement.innerText = postData.type;
+
+  const dateElement = document.createElement('span');
+  const date = new Date(postData.timestamp);
+  const dateTime = " - " + date.toDateString() + " " + date.getHours() + ":" + date.getMinutes();
+  dateElement.innerText = dateTime;
+
+  const commentElement = document.createElement('p');
+  commentElement.innerText = postData.comment;
+
+  const starRatingElement = document.createElement('input');
+  starRatingElement.className = 'rating-loading';
+  starRatingElement.type = 'text';
+  starRatingElement.id = 'stars' + postData.id;
+  //TODO: Add field in the data class to store rating values 
+  if(postData.value != 0){
+    starRatingElement.value = postData.value;
+  }
+  
+  liElement.appendChild(nameElement);
+  liElement.appendChild(textElement);
+  liElement.appendChild(dateElement);
+  liElement.appendChild(commentElement);
+  liElement.appendChild(starRatingElement);
+  
+  return liElement;
+}
+
+/**
  * Loads the star rating settings into the page.
  */
 function loadStarRatings(id){
@@ -72,4 +130,20 @@ function search(){
       historyEl.appendChild(createListElement(line));
     });
   });
+}
+
+function storeStarRatings(id){
+    $(document).ready(function(){
+        console.log($(id).find("filled-stars"));
+        $(id).on('rating:change', function(event, value, caption) {
+            //TODO: Connect to Database to store star values
+            console.log(value);
+            console.log(event);
+            console.log(caption);
+
+            // Disables the user from submitting another review
+            $(id).rating("refresh", {disabled:true, showClear:false});
+        });
+    });
+    
 }

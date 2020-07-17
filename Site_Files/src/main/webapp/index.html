@@ -37,13 +37,37 @@
         <input type="text" placeholder="Search ...">
     </div>
 
+    <!-- Forms -->
+    <a href="/import.html" class="u_btn_add">import</a>
+    <a href="/output.html" class="u_btn_add">outport</a> 
+
     <!--Rating System Output--> 
+    <div class="posts-container"></div>
+
+<!--
     <div>
+        <input id="input-1" type="text" class="rating-loading">
         <input id="input-2" type="text" class="rating-loading">
         <script>loadStarRatings("#input-2")</script>
+        <script>loadStarRatings("#input-1")</script>
+        <script>
+            id = "#input-2";
+            $(id).on('rating:change', function(event, value, caption) {
+                console.log(value);
+                console.log(event);
+                console.log(caption);
+                console.log("hello");
+            });
+            id1 = "#input-1";
+            $(id1).on('rating:change', function(event, value, caption) {
+                console.log(value);
+                console.log(event);
+                console.log(caption);
+                console.log("world");
+            });
+        </script>
     </div>
-        <a href="/import.html" class="u_btn_add">inport</a>
-        <a href="/output.html" class="u_btn_add">outport</a> 
+-->
   </body>
 
 </html>
