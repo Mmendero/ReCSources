@@ -12,6 +12,14 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.PostInformation;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.appengine.api.datastore.Query;
+// import com.google.appengine.api.datastore;
+// import com.google.appengine.api.StructuredQuery;
+// import com.google.appengine.api.StructuredQuery.PropertyFilter;
+// import com.google.cloud.datastore;
+// import com.google.cloud.datastore.StructuredQuery;
+// import com.google.cloud.datastore.StructuredQuery.PropertyFilter;
+
 
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -25,13 +33,16 @@ public class GetInformation extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
     String name_search= request.getParameter("name-search");
-    String type_search= request.getParameter("type-search");  
-    Query query = new Query("PostInformation").addSort("timestamp", SortDirection.DESCENDING);
+    String type_search= request.getParameter("type-search"); 
+
+    Query query = new Query("PostInformation").addFilter("name", Query.FilterOperator.EQUAL, name_search).addFilter("type", Query.FilterOperator.EQUAL, type_search);
+    //Query query = Query.newEntityQueryBuilder().setKind("PostInformation").setFilter(PropertyFilter.eq("name", name_search)).build();
+    //Query query = new Query("PostInformation").addSort("timestamp", SortDirection.DESCENDING);
+    //Query<Entity> query =Query.newEntityQueryBuilder().setKind("Task").setFilter(PropertyFilter.eq("name", name_search)).build();
+    
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-
     List<PostInformation> list = new ArrayList<PostInformation>();
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
@@ -45,8 +56,7 @@ public class GetInformation extends HttpServlet {
     }
     response.setContentType("application/json");
     String json = new Gson().toJson(list);
-    response.getWriter().println(json); 
-    
+    response.getWriter().println(json);     
 }
 private String convertToJson() {
     String json = "{";

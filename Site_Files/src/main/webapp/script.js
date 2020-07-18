@@ -41,7 +41,7 @@ function getHistory() {
 
 function createListElement(text) {
   const liElement = document.createElement('li');
-  liElement.innerText ="Email: "+text.email+" Nick name: "+text.name+" Comment: "+text.comment;
+  liElement.innerText ="Email: "+text.email+"  Name: "+text.name+"  Type： "+ text.type+"  Comment: "+text.comment;
   return liElement;
 }
 
