@@ -21,7 +21,7 @@
   <body>
 
     <!--Code for Header/Navigation Menu--> 
-    <div class="header">
+    <div id="header">
         <a href="./index.html" class="logo">Resource Site</a>
         <div class="header-right">
             <a class="active" href="./index.html">Home</a>
@@ -31,10 +31,22 @@
     </div>
 
     <!--Main content of page (Options/Search Bar)--> 
-    <div class="content">
-        <p>This is the intro paragraph</p>
-        <p id = "prompt">The Opportunities i'm looking for are...</p>
-        <input type="text" placeholder="Search ...">
+    <div id="content">
+        <p id="intro">Welcome to [REDACTED]! Our goal is to expand your reach and radar when it comes to furthering your career in CS! Here, you'll be able to look for a wide variety of different resources help you learn a variety of CS-related topics from internships to textbooks!</p>
+        <p id="prompt">The Opportunities i'm looking for are...</p>
+    </div>
+
+    <div id="search-form">
+        <form action="/inf" method="GET">
+            <input type="text" name="text" class="search" placeholder="Search here!">
+            <select name="Type" class="type-select">
+                <option value="Resource Type">Resource Type</option>
+                <option value="Book">Book</option>
+                <option value="Internship">Internship</option>
+                <option value="Podcast">Podcast</option>
+            </select>  
+            <input type="submit" name="submit" class="submit" value="Search">
+        </form>
     </div>
 
     <!--Rating System Output--> 
