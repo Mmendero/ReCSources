@@ -113,23 +113,23 @@ body {
     border-radius: 5px;
     font-size: 20px;
     padding: 20px;
-    background-color: #42d7f5;
+    background-color: dodgerblue;
     color: #ffffff;
 }
 
 /*Contacts Profile Picture Style*/
-.content img {
+#content img {
     border-radius: 50%;
     width: 200px;
 }
 
-#name{
+.name{
     color: #42d7f5;
     font-weight: bold;
     font-size: 35px;
 }
 
-#bio{
+.bio{
     font-size: 25px;
 }
 
