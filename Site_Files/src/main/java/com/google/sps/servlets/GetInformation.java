@@ -57,29 +57,7 @@ public class GetInformation extends HttpServlet {
     }
     response.setContentType("application/json");
     String json = new Gson().toJson(list);
-<<<<<<< HEAD
     response.getWriter().println(json); 
     
   }
-=======
-    response.getWriter().println(json);     
-}
-private String convertToJson() {
-    String json = "{";
-    json += "\"acc\"";
-    json += ", ";
-    json += "\"acc\"";
-    json += "}";
-    return json;  
-}
-
-
-@Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-  
-}
-
-
-
->>>>>>> 840985f3206a6f9fb3cafeace1d6cb37e2271236
 }
