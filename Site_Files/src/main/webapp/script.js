@@ -38,28 +38,40 @@ function getHistory() {
   });
 }
 
-
 function createListElement(text) {
   const liElement = document.createElement('li');
   liElement.innerText ="Email: "+text.email+" Nick name: "+text.name+" Comment: "+text.comment;
   return liElement;
 }
 
+function search(){
+   let name= document.getElementById("name-search");
+  
+
+    let type= document.getElementById("type-search");
+  
+   
+   fetch('/getInf?name-search='+name.value + '&type-search=' +type.value).then(response => response.json()).then((comment) => {
+   console.log(comment);
+   const historyEl = document.getElementById('history');
+    comment.forEach((line) => {
+      historyEl.appendChild(createListElement(line));
+    });
+  });
+}
+
 /**
- * Retrieves the posts from the /getInf servlet and injects it into the page
+ * Retrieves the posts from the /inf servlet and injects it into the page
  */
 function getAllPosts() {
-  fetch('/getInf').then(response => response.json()).then((posts) => {
-      
+  fetch('/inf').then(response => response.json()).then((posts) => {
     const postsListElement = document.getElementById('posts-container');
-    postsListElement.innerHTML = '';
 
     // for each message, display it in a list
-    posts.forEach(post => {
+    posts.forEach((post) => {
         postsListElement.appendChild(createPostElement(post));
-        // Sets up the functionality for the ratings
-        loadStarRatings(post.id);
-        storeStarRatings(post.id);
+        loadStarRatings("#rating-" + post.id);
+        storeStarRatings("#rating-" + post.id);
     });
   });
 }
@@ -69,7 +81,8 @@ function getAllPosts() {
  */
 function createPostElement(postData) {
   const liElement = document.createElement('li');
-  liElement.className = 'post' + postData.id;
+  liElement.className = "post";
+  liElement.id = "post-" + postData.id;
 
   const nameElement = document.createElement('span');
   nameElement.innerText = postData.name + " (" + postData.email + ")" ;
@@ -84,18 +97,15 @@ function createPostElement(postData) {
 
   const commentElement = document.createElement('p');
   commentElement.innerText = postData.comment;
-
+  
   const starRatingElement = document.createElement('input');
   starRatingElement.className = 'rating-loading';
   starRatingElement.type = 'text';
-  starRatingElement.id = 'stars' + postData.id;
-  //TODO: Add field in the data class to store rating values 
-  if(postData.value != 0){
-    starRatingElement.value = postData.value;
-  }
+  starRatingElement.id = 'rating-' + postData.id;
+  starRatingElement.value = postData.rating;
   
   liElement.appendChild(nameElement);
-  liElement.appendChild(textElement);
+  liElement.appendChild(typeElement);
   liElement.appendChild(dateElement);
   liElement.appendChild(commentElement);
   liElement.appendChild(starRatingElement);
@@ -114,36 +124,27 @@ function loadStarRatings(id){
         starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'}
         });
     });
-
-}
-function search(){
-   let name= document.getElementById("name-search");
-  
-
-    let type= document.getElementById("type-search");
-  
-   
-   fetch('/getInf?name-search='+name.value + '&type-search=' +type.value).then(response => response.json()).then((comment) => {
-   console.log(comment);
-   const historyEl = document.getElementById('history');
-    comment.forEach((line) => {
-      historyEl.appendChild(createListElement(line));
-    });
-  });
 }
 
+/**
+ * Stores the star rating to the DataStore.
+ */
 function storeStarRatings(id){
     $(document).ready(function(){
-        console.log($(id).find("filled-stars"));
         $(id).on('rating:change', function(event, value, caption) {
-            //TODO: Connect to Database to store star values
-            console.log(value);
-            console.log(event);
-            console.log(caption);
-
-            // Disables the user from submitting another review
-            $(id).rating("refresh", {disabled:true, showClear:false});
+            
+            changeRating = {
+                rating: value,
+                id: id
+            };
+            
+            $.post("change-rating", changeRating, function(data, status, xhr) {
+                if(status == "success"){
+                    // Disables the user from submitting another review
+                    $(id).rating("refresh", {disabled:true, showClear:false});
+                    console.log("sucess!");
+                }
+            });
         });
-    });
-    
+    });   
 }
