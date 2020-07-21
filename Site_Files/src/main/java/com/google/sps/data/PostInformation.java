@@ -24,6 +24,14 @@ public class PostInformation {
         this.rating = rating;
    }
 
+   public void setId(long ide){
+       id = ide;
+   }
+
+   public void setTimestamp(long time){
+       timestamp = time;
+   }
+
    public void  setName(String na){
        name=na;
    }
@@ -41,6 +49,14 @@ public class PostInformation {
 
     public void  setRating(int ra){
        rating=ra;
+   }
+
+    public long getId(){
+       return id;
+   }
+
+   public long getTimestamp(){
+       return timestamp;
    }
 
    public String getName(){
