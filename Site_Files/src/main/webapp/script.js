@@ -70,8 +70,8 @@ function getAllPosts() {
     // for each message, display it in a list
     posts.forEach((post) => {
         postsListElement.appendChild(createPostElement(post));
-        loadStarRatings("#rating-" + post.id);
-        storeStarRatings("#rating-" + post.id);
+        loadStarRatings(post.id, post.rating);
+        storeStarRatings(post.id);
     });
   });
 }
@@ -80,15 +80,29 @@ function getAllPosts() {
  * Create each post element using the DataStore information
  */
 function createPostElement(postData) {
-  const liElement = document.createElement('li');
-  liElement.className = "post";
-  liElement.id = "post-" + postData.id;
 
-  const nameElement = document.createElement('span');
-  nameElement.innerText = postData.name + " (" + postData.email + ")" ;
+  const divElement = document.createElement('div');
+  divElement.className = "card";
+  divElement.id = "post-" + postData.id;
+  var postColor = "white";
+  if(postData.type == "book"){
+      postColor = '#6699cc';
+  }
+  else if(postData.type == "podcasts"){
+      postColor = '#9370db';
+  }
+  else if(postData.type == "internship"){
+      postColor = '#be0032';
+  }
+  divElement.style.backgroundColor = postColor;
+
+  const nameElement = document.createElement('h3');
+  nameElement.innerText = postData.name;
 
   const typeElement = document.createElement('span');
   typeElement.innerText = postData.type;
+  typeElement.className = "category";
+  typeElement.style.color = postColor;
 
   const dateElement = document.createElement('span');
   const date = new Date(postData.timestamp);
@@ -97,6 +111,7 @@ function createPostElement(postData) {
 
   const commentElement = document.createElement('p');
   commentElement.innerText = postData.comment;
+  commentElement.className = "comment";
   
   const starRatingElement = document.createElement('input');
   starRatingElement.className = 'rating-loading';
@@ -104,24 +119,26 @@ function createPostElement(postData) {
   starRatingElement.id = 'rating-' + postData.id;
   starRatingElement.value = postData.rating;
   
-  liElement.appendChild(nameElement);
-  liElement.appendChild(typeElement);
-  liElement.appendChild(dateElement);
-  liElement.appendChild(commentElement);
-  liElement.appendChild(starRatingElement);
+  divElement.appendChild(nameElement);
+  divElement.appendChild(typeElement);
+  divElement.appendChild(dateElement);
+  divElement.appendChild(commentElement);
+  divElement.appendChild(starRatingElement);
   
-  return liElement;
+  return divElement;
 }
 
 /**
  * Loads the star rating settings into the page.
  */
-function loadStarRatings(id){
+function loadStarRatings(id, rating){
     $(document).ready(function(){
-        $(id).rating({
+        $("#rating-" + id).rating({
         step: 1,
         starCaptions: {1: 'Very Poor', 2: 'Poor', 3: 'Ok', 4: 'Good', 5: 'Very Good'},
-        starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'}
+        starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'},
+        disabled: rating > 0,
+        showClear: rating == 0 
         });
     });
 }
@@ -131,7 +148,7 @@ function loadStarRatings(id){
  */
 function storeStarRatings(id){
     $(document).ready(function(){
-        $(id).on('rating:change', function(event, value, caption) {
+        $("#rating-" + id).on('rating:change', function(event, value, caption) {
             
             changeRating = {
                 rating: value,
@@ -141,8 +158,8 @@ function storeStarRatings(id){
             $.post("change-rating", changeRating, function(data, status, xhr) {
                 if(status == "success"){
                     // Disables the user from submitting another review
-                    $(id).rating("refresh", {disabled:true, showClear:false});
-                    console.log("sucess!");
+                    $("#rating-" + id).rating("refresh", {disabled:true, showClear:false});
+                    console.log("Rating success!");
                 }
             });
         });
