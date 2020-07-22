@@ -59,10 +59,8 @@ function loadStarRatings(id){
 
 }
 function search(){
-   let name= document.getElementById("name-search");
-  
-
-    let type= document.getElementById("type-search");
+    let name= document.getElementById("entry");
+    let type= document.getElementById("type-select");
   
    
    fetch('/getInf?name-search='+name.value + '&type-search=' +type.value).then(response => response.json()).then((comment) => {

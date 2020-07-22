@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Listing</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+    </head>
+    
+    <body onload="getHistory()">
+
+        <!--Code for Header/Navigation Menu--> 
+        <div id="header">
+            <a href="./index.html" class="logo">Resource Site</a>
+            <div class="header-right">
+                <a href="./index.html">Home</a>
+                <a class="active" href="./add.html">Add Listing</a>
+                <a href="./contacts.html">Contact</a>
+                <a href="./login.html">Login/Signup</a>
+            </div>
+        </div>
+
+        <form action="/inf" method="POST">
+            <p>Enter name of your want to share:</p>
+            <textarea name="name-imput">name</textarea>
+            <p>Enter your Email:</p>
+            <textarea name="email-imput">name</textarea>
+            <p>Type of that:</p>
+            <!--<textarea name="type-imput">type</textarea>-->
+            <select name="type-imput">
+                    <option value="Book">Book</option>
+                    <option value="internship">internship</option>
+                    <option value="podcasts">podcasts</option>
+            </select>
+            <p>Enter your comment:</p>
+            <textarea name="comment-imput" style="width:200px; height:100px">your comment</textarea>
+            <br/><br/>
+            <input type="submit" />
+        </form>
+
+        <ul id="history"></ul>
+    </body>
+</html>

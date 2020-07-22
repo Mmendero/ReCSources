@@ -21,29 +21,43 @@
   <body>
 
     <!--Code for Header/Navigation Menu--> 
-    <div class="header">
+    <div id="header">
         <a href="./index.html" class="logo">Resource Site</a>
         <div class="header-right">
             <a class="active" href="./index.html">Home</a>
+            <a href="./add.html">Add Listing</a>
             <a href="./contacts.html">Contact</a>
             <a href="./login.html">Login/Signup</a>
         </div>
     </div>
 
     <!--Main content of page (Options/Search Bar)--> 
-    <div class="content">
-        <p>This is the intro paragraph</p>
-        <p id = "prompt">The Opportunities i'm looking for are...</p>
-        <input type="text" placeholder="Search ...">
+    <div id="content">
+        <p id="intro">Welcome to [REDACTED]! Our goal is to expand your reach and radar when it comes to furthering your career in CS. Here, you'll be able to look for a wide variety of different resources help you learn a variety of CS-related topics from internships to textbooks!</p>
+        <p id="prompt">The Opportunities I'm Looking For Are...</p>
     </div>
 
-    <!--Rating System Output--> 
+    <div id="search-form">
+        <input type="text" name="entry" id="entry" class="search" placeholder="Search here!">
+        <select name="type" id="type-select" class="type-select">
+            <option value="Type">Type</option>
+            <option value="Book">Book</option>
+            <option value="Internship">Internship</option>
+            <option value="Podcast">Podcast</option>
+        </select>
+        <input type="submit" name="submit" class="submit" onclick="search()" value="Search">
+    </div>
+    
+    <!--Search Results--> 
+    <ul id="history"></ul> 
+
+    <!--Rating System Output 
     <div>
         <input id="input-2" type="text" class="rating-loading">
         <script>loadStarRatings("#input-2")</script>
-    </div>
-        <a href="/import.html" class="u_btn_add">inport</a>
-        <a href="/output.html" class="u_btn_add">outport</a> 
+    </div>-->
+
+
   </body>
 
 </html>
