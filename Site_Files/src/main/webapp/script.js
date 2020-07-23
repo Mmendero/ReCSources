@@ -86,7 +86,7 @@ function createPostElement(postData) {
   divElement.id = "post-" + postData.id;
   var postColor = "white";
   if(postData.type == "book"){
-      postColor = '#6699cc';
+      postColor = 'dodgerblue';
   }
   else if(postData.type == "podcasts"){
       postColor = '#9370db';
@@ -135,8 +135,7 @@ function loadStarRatings(id, rating){
     $(document).ready(function(){
         $("#rating-" + id).rating({
         step: 1,
-        starCaptions: {1: 'Very Poor', 2: 'Poor', 3: 'Ok', 4: 'Good', 5: 'Very Good'},
-        starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'},
+        starCaptions: {1: 'Poor', 2: 'Bad', 3: 'Ok', 4: 'Good', 5: 'Excellent'},
         disabled: rating > 0,
         showClear: rating == 0 
         });

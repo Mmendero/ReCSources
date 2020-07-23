@@ -67,6 +67,7 @@ private String convertToJson() {
     commentEntity.setProperty("name",text);
     commentEntity.setProperty("comment", text1);
     commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("rating", 0);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
     response.sendRedirect("/import.html");
