@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PostInformation {       //this is for store the data of post stuff
+public class PostInformation {       
+    //this is for store the data of post stuff
     private long id;
     private String email;
-    //private ArrayList<String> type;
     private String type;
     private String name;
     private String comment;
     private long timestamp;
+    private int rating;
   
 
 
-   public PostInformation(long id, String email, String type, String name, String comment, long timestamp)
+   public PostInformation(long id, String email, String type, String name, String comment, long timestamp, int rating)
   {
    this.id=id;
    this.email=email;
@@ -23,6 +24,7 @@ public class PostInformation {       //this is for store the data of post stuff
    this.name=name;
    this.comment=comment;
    this.timestamp=timestamp;
+   this.rating = rating;
   }
 
    public void  setName(String na)
@@ -44,6 +46,16 @@ public class PostInformation {       //this is for store the data of post stuff
        comment=co;
    }
 
+   public void setTimestamp(long timestamp)
+   {
+       this.timestamp=timestamp;
+   }
+
+   public void  setRating(int ra)
+   {
+       rating=ra;
+   }
+
    public String getName()
    {
        return name;
@@ -63,7 +75,8 @@ public class PostInformation {       //this is for store the data of post stuff
        return comment;
    }
 
-   public void setId(long id){
+   public void setId(long id)
+   {
        this.id=id;
    }
 
@@ -71,12 +84,14 @@ public class PostInformation {       //this is for store the data of post stuff
        return id;
    }
 
-     public void setTimestamp(long timestamp){
-       this.timestamp=timestamp;
+   public long getTimestamp()
+   {
+       return timestamp;
    }
 
-   public long getTimestamp(){
-       return timestamp;
+   public int  getRating()
+   {
+       return rating;
    }
 
 }

@@ -51,7 +51,8 @@ public class GetInformation extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String comment = (String) entity.getProperty("comment");
       long timestamp = (long) entity.getProperty("timestamp");
-      PostInformation c = new PostInformation(id,email,type,name,comment,timestamp);
+      int rating = (int) (long) entity.getProperty("rating");
+      PostInformation c = new PostInformation(id,email,type,name,comment,timestamp, 0);
       list.add(c);
     }
     response.setContentType("application/json");
@@ -66,13 +67,4 @@ private String convertToJson() {
     json += "}";
     return json;  
 }
-
-
-@Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-  
-}
-
-
-
 }

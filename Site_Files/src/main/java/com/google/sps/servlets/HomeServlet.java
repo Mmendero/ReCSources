@@ -19,7 +19,7 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 
 
-/** Servlet connect to the data store, store the commnets data*/
+/** Servlet connect to the data store, store the comments data*/
 @WebServlet("/inf")
 public class HomeServlet extends HttpServlet {
   @Override
@@ -37,7 +37,8 @@ public class HomeServlet extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String comment = (String) entity.getProperty("comment");
       long timestamp = (long) entity.getProperty("timestamp");
-      PostInformation c = new PostInformation(id,email,type,name,comment,timestamp);
+      int rating = (int)(long) entity.getProperty("rating");
+      PostInformation c = new PostInformation(id,email,type,name,comment,timestamp, rating);
       list.add(c);
     }
     response.setContentType("application/json");
@@ -53,13 +54,12 @@ private String convertToJson() {
     return json;  
 }
 
-
 @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String emailInput = getParameter(request, "email-imput", "");
-    String text = getParameter(request, "name-imput", "");   
-    String textType = getParameter(request, "type-imput", "");   
-    String text1 = getParameter(request, "comment-imput", "");   
+    String emailInput = getParameter(request, "email-input", "");
+    String text = getParameter(request, "name-input", "");   
+    String textType = getParameter(request, "type-input", "");   
+    String text1 = getParameter(request, "comment-input", "");   
     long timestamp = System.currentTimeMillis();
     Entity commentEntity = new Entity("PostInformation");
     commentEntity.setProperty("email",emailInput);
